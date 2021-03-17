@@ -7,15 +7,18 @@ export const weatherSlice = createSlice({
     humidity: 0,
     windSpeed: 0,
     icon: undefined,
-    city: undefined
+    city: undefined,
+    condition: undefined
+
   },
   reducers: {
     updateWeather: (state, action) => {
-      state.temperature = action.payload.temperature;
-      state.humidity = action.payload.humidity;
-      state.windSpeed = action.payload.windSpeed;
+      state.temperature = Math.trunc(action.payload.temperature);
+      state.humidity = Math.trunc(action.payload.humidity);
+      state.windSpeed = Math.trunc(action.payload.windSpeed);
       state.icon = action.payload.icon;
       state.city = action.payload.city;
+      state.condition = action.payload.condition;
     }
   },
 });
@@ -31,6 +34,10 @@ export const selectWindSpeed = state => state.weather.windSpeed;
 export const selectIcon = state => state.weather.icon;
 
 export const selectCity = state => state.weather.city;
+
+// (Roy) For an entire list of types a weather condition can be, refer to the API guidelines below
+// https://openweathermap.org/weather-conditions#Weather-Condition-Codes-2
+export const selectIsSunny = state => ['Clear', 'Clouds'].includes(state.weather.condition);
 
 export default weatherSlice.reducer;
 

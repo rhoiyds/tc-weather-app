@@ -18,12 +18,21 @@ export function Weather() {
     const city = useSelector(selectCity);
 
   return (
-    <div>
-        <p>City: {city} </p>
-        <p>Temp: {temperature} </p>
-        <p>Humidity: {humidity} </p>
-        <p>Wind: {windSpeed} </p>
-        <img className="Weather-icon" alt="weather-icon" src={`http://openweathermap.org/img/wn/${icon}@4x.png`} />
+    <div className="weather-container">
+        <div className="city-name"> 
+          {city}
+        </div>
+        <img className="weather-icon" alt="weather-icon" height="325px" src={`http://openweathermap.org/img/wn/${icon}@4x.png`} />
+        <hr />
+        <div className="container">
+          <div className="temperature">
+            {temperature} &deg;
+          </div>
+          <div className="wind-and-humidity">
+            <div className="humidity"><i className="wi wi-raindrop"></i>{humidity}%</div>
+            <div className="wind"><i className="wi wi-small-craft-advisory"></i>{windSpeed} <small>Km/h</small></div>
+          </div>
+        </div>
     </div>
   );
 }
