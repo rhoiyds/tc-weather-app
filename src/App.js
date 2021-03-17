@@ -1,37 +1,47 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
 import { Weather } from './features/weather/Weather';
+import { requestGeolocation } from './utilities/geolocation';
+import { fetchWeatherData } from './utilities/openWeatherMap';
+import { useDispatch } from 'react-redux';
 import { updateWeather } from './features/weather/weatherSlice';
+
+
 import './App.css';
 
 function App() {
 
   const dispatch = useDispatch();
-  const axios = require('axios');
-  const OPEN_WEATHER_MAP_API_KEY = '854bd4455249d79ab3b98653353ab63e';
-  const OPEN_WEATHER_MAP_API_ENDPOINT = 'https://api.openweathermap.org/data/2.5/weather';
+  const queryString = require('query-string');
 
-  axios.get(OPEN_WEATHER_MAP_API_ENDPOINT, {
-    params: {
-    q: 'London,uk',
-    appid:  OPEN_WEATHER_MAP_API_KEY,
-    units: 'metric'
-    }
-    })
-    .then(function (response) {    
-        console.log(response);
-        dispatch(updateWeather({
-          temperature: response.data.main.temp,
-          humidity: response.data.main.humidity,
-          windSpeed: response.data.wind.speed,
-          // (Roy) Weather is an array of Weather objects (unclear why)
-          icon: response.data.weather[0].icon
-      }))
-    })
-    .catch(function (error) {
-        // (Roy) Add error messaging and notification
-        console.log(error);
+  //Check the URL parameters for a list of cities
+  const queryParameter = queryString.parse(window.location.search)['cities'];
+
+  if (queryParameter) {
+    //If the list of cities exist, fetch the weather data for them
+    fetchWeatherData({q: queryParameter}, dispatchCallBack)
+  } else {
+    //Otherwise resolve our current location, and fetch the weather for there
+    requestGeolocation((position) => {
+      const extraParams = {
+        lat: position.coords.latitude,
+        lon: position.coords.longitude
+      }
+      fetchWeatherData(extraParams, dispatchCallBack)
     });
+  }
+
+  function dispatchCallBack(response) {    
+    console.log(response);
+    //Store our weather data in the 
+    dispatch(updateWeather({
+        city: response.data.name,
+        temperature: response.data.main.temp,
+        humidity: response.data.main.humidity,
+        windSpeed: response.data.wind.speed,
+        // (Roy) Weather is an array of Weather objects (unclear why)
+        icon: response.data.weather[0].icon
+    }))
+}
 
   return (
    <div>

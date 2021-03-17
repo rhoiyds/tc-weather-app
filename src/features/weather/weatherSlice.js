@@ -6,7 +6,8 @@ export const weatherSlice = createSlice({
     temperature: 0,
     humidity: 0,
     windSpeed: 0,
-    icon: undefined
+    icon: undefined,
+    city: undefined
   },
   reducers: {
     updateWeather: (state, action) => {
@@ -14,6 +15,7 @@ export const weatherSlice = createSlice({
       state.humidity = action.payload.humidity;
       state.windSpeed = action.payload.windSpeed;
       state.icon = action.payload.icon;
+      state.city = action.payload.city;
     }
   },
 });
@@ -27,6 +29,8 @@ export const selectHumidity = state => state.weather.humidity;
 export const selectWindSpeed = state => state.weather.windSpeed;
 
 export const selectIcon = state => state.weather.icon;
+
+export const selectCity = state => state.weather.city;
 
 export default weatherSlice.reducer;
 
