@@ -1,4 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { rainy } from '../../particles/rainy';
+import { sunny } from '../../particles/sunny';
+import { snowy } from '../../particles/snowy';
+import { cloudy } from '../../particles/cloudy';
 
 export const weatherSlice = createSlice({
   name: 'weather',
@@ -35,11 +39,28 @@ export const selectIcon = state => state.weather.icon;
 
 export const selectCity = state => state.weather.city;
 
-//An arbitary threshold to control what is 'hot' (yellow), or 'cold' (blue). As an Australian, below 15 is very chilly.
+// (Roy) An arbitary threshold to control what is 'hot' (yellow), or 'cold' (blue). As an Australian, below 15 is very chilly.
 export const selectIsHot = state => state.weather.temperature > 15;
 
-//An arbitary threshold to control highwind icon
+// (Roy) An arbitary threshold to control highwind icon
 export const selectIsHighwind = state => state.weather.windSpeed > 40;
+
+// (Roy) For a comprehensive list of different types of weather conditions check below:
+// https://openweathermap.org/weather-conditions
+export const selectCondition = state => {
+  switch (state.weather.condition) {
+    case 'Clear':
+      return sunny
+    case 'Rain':
+    case 'Drizzle':
+    case 'Thunderstorm':
+      return rainy
+    case 'Snow':
+      return snowy
+    default:
+      return cloudy
+  }
+}
 
 export default weatherSlice.reducer;
 
