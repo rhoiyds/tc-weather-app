@@ -11,20 +11,7 @@ function errors(err) {
 
 export function requestGeolocation(callback) {
     if (navigator.geolocation) {
-        navigator.permissions
-            .query({ name: "geolocation" })
-            .then(function (result) {
-                if (result.state === "granted") {
-                    navigator.geolocation.getCurrentPosition(callback);
-                } else if (result.state === "prompt") {
-                    navigator.geolocation.getCurrentPosition(callback, errors, options);
-                } else if (result.state === "denied") {
-                    //If denied then you have to show instructions to enable location
-                }
-                result.onchange = function () {
-                    console.log(result.state);
-                };
-            });
+        navigator.geolocation.getCurrentPosition(callback, errors, options);
     } else {
         alert("Geolocation is not available on this browser.");
     }
