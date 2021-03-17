@@ -35,7 +35,6 @@ function App() {
   }
 
   function dispatchCallBack(response) {    
-    console.log(response);
     //Store our weather data in the Redux store
     dispatch(updateWeather({
         city: response.data.name,
