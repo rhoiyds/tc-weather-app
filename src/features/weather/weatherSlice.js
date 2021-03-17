@@ -35,9 +35,11 @@ export const selectIcon = state => state.weather.icon;
 
 export const selectCity = state => state.weather.city;
 
-// (Roy) For an entire list of types a weather condition can be, refer to the API guidelines below
-// https://openweathermap.org/weather-conditions#Weather-Condition-Codes-2
-export const selectIsSunny = state => ['Clear', 'Clouds'].includes(state.weather.condition);
+//An arbitary threshold to control what is 'hot' (yellow), or 'cold' (blue). As an Australian, below 15 is very chilly.
+export const selectIsHot = state => state.weather.temperature > 15;
+
+//An arbitary threshold to control highwind icon
+export const selectIsHighwind = state => state.weather.windSpeed > 40;
 
 export default weatherSlice.reducer;
 

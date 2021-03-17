@@ -5,7 +5,8 @@ import {
     selectHumidity,
     selectWindSpeed,
     selectIcon,
-    selectCity
+    selectCity,
+    selectIsHighwind
 } from './weatherSlice';
 import './Weather.css';
 
@@ -16,6 +17,7 @@ export function Weather() {
     const windSpeed = useSelector(selectWindSpeed);
     const icon = useSelector(selectIcon);
     const city = useSelector(selectCity);
+    const isHighwind = useSelector(selectIsHighwind);
 
   return (
     <div className="weather-container">
@@ -30,7 +32,10 @@ export function Weather() {
           </div>
           <div className="wind-and-humidity">
             <div className="humidity"><i className="wi wi-raindrop"></i>{humidity}%</div>
-            <div className="wind"><i className="wi wi-small-craft-advisory"></i>{windSpeed} <small>Km/h</small></div>
+            <div className="wind">
+              <i className={"wi " + (isHighwind ? "wi-gale-warning" : "wi-small-craft-advisory")}></i>
+              {windSpeed} <small>Km/h</small>
+            </div>
           </div>
         </div>
     </div>

@@ -3,16 +3,16 @@ import { Weather } from './features/weather/Weather';
 import { requestGeolocation } from './utilities/geolocation';
 import { fetchWeatherData } from './utilities/openWeatherMap';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectIsSunny } from './features/weather/weatherSlice'
+import { selectIsHot } from './features/weather/weatherSlice'
 import { updateWeather } from './features/weather/weatherSlice';
 import { css } from '@emotion/css'
+import Particles from "react-tsparticles";
+import { rainy } from './particles/rainy';
+import { sunny } from './particles/sunny';
 
 function App() {
 
-  const blueColor = '#273f8f'
-  const yellowColor = '#ffcc01';
-
-  const isSunny = useSelector(selectIsSunny);
+  const isHot = useSelector(selectIsHot);
 
   const dispatch = useDispatch();
   const queryString = require('query-string');
@@ -49,14 +49,25 @@ function App() {
 }
 
   return (
-   <div className={css`
-        background-color: ${isSunny ? yellowColor : blueColor};
-        width: 100%;
-        height: 100%;
-        position: absolute;
-   `}>
-     <Weather />
+    <>
+      <Particles
+      className={css`
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      background-color: ${isHot ? '#ffcc01' : '#273f8f'};
+      `}
+      id="tsparticles"
+      options={isHot ? sunny : rainy}
+    />
+    <div className={css`
+          width: 100%;
+          height: 100%;
+          position: absolute;
+    `}>
+      <Weather />
    </div>
+   </>
         
   );
 }
