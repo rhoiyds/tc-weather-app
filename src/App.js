@@ -11,13 +11,13 @@ import Particles from "react-tsparticles";
 
 function App() {
 
-  const dispatch = useDispatch();
-
   const isHot = useSelector(selectIsHot);
 
   const conditionParticles = useSelector(selectCondition)
 
   const currentCity = useSelector(selectCurrentCity)
+
+  const dispatch = useDispatch();
 
   //useEffect to control this function to only run on the first render.
   useEffect(() => {
@@ -46,21 +46,26 @@ function App() {
           lat: position.coords.latitude,
           lon: position.coords.longitude
         }
-        fetchWeatherData(extraParams, dispatchCallBack)
+        fetchWeatherData(extraParams).then(response => {
+          dispatch(updateWeather({
+            city: response.data.name,
+            temperature: response.data.main.temp,
+            humidity: response.data.main.humidity,
+            windSpeed: response.data.wind.speed,
+            // (Roy) Weather is an array of Weather objects for showing weather over time, current weather is index 0
+            icon: response.data.weather[0].icon,
+            condition: response.data.weather[0].main
+        }))
+        })
       });
     }
-  }, []);
+  }, [dispatch]);
 
   // (Roy) When current city is updated, fetch the weather data
   useEffect(() => { 
     if (!currentCity) return
-    fetchWeatherData({q: currentCity}, dispatchCallBack)   
-  }, [currentCity]);
-
-  // (Roy) A function used as a callback after retrieving weather data from the API
-  function dispatchCallBack(response) {    
-    // (Roy) Store our weather data in the Redux store
-    dispatch(updateWeather({
+    fetchWeatherData({q: currentCity}).then(response => {
+      dispatch(updateWeather({
         city: response.data.name,
         temperature: response.data.main.temp,
         humidity: response.data.main.humidity,
@@ -69,7 +74,9 @@ function App() {
         icon: response.data.weather[0].icon,
         condition: response.data.weather[0].main
     }))
-}
+    }) 
+  }, [currentCity, dispatch]);
+
 
   return (
     <>

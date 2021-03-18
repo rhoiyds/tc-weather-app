@@ -10,16 +10,16 @@ const defaultParams = {
 
 const api = setup()
 
-export async function fetchWeatherData(extraParams, dispatchCallback) {
+export async function fetchWeatherData(extraParams) {
     const params = {...defaultParams, ...extraParams}
     // (Roy) 'Exclude' is only neccessary due to a horrible bug which stops the cache from working
     // as intended, when paired with query parameters. Lost a few hours searching for this...
     // https://github.com/RasCarlito/axios-cache-adapter/issues/117#issuecomment-555017242
-    await api.get(OPEN_WEATHER_MAP_API_ENDPOINT, {
+    return await api.get(OPEN_WEATHER_MAP_API_ENDPOINT, {
         cache: {
             maxAge: 5 * 60 * 1000, //5 minutes (in milliseconds)
             exclude: { query: false }
         },
         params: params
-    }).then(dispatchCallback)
+    })
 }
