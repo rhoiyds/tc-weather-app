@@ -1,68 +1,90 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
+# TableCheck Weather App
+Roy Porter's implementation of a programming competency test designed for proving basic knowledge in ReactJS and front end web technologies.
 
-## Available Scripts
+### Functional requirements
 
-In the project directory, you can run:
+- [x] Detect the current city using geolocation
+- [x] Display the city name, current weather icon, temperature, humidity and wind speed
+- [x] The background colour changes based on the temperature
+- [x] Loads a specific city using the query string ‘?city=Tokyo’
+- [x] Caches the API data and refresh it after 5m
+<details>
+  <summary>Honorable mention</summary>
+  <p>
+Encountered a bug in the library _Axios Cache Adapter_ which meant Axios was not using the cache _even though I explicity set it to_
+  </p>
+</details>
+- [x] Responsive design. It should work well in all devices (desktop/tablet/mobile)
+<details>
+  <summary>How?</summary>
+  <p>
+Using basic Flexbox layout principles to create a stretchy interface. If an alternative design was supplied for desktop, maybe media queries would be appropriate.
+  </p>
+</details>
 
-### `npm start`
+### Tech stack
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- [x] Cross-browser compatible back to Internet Explorer 11
+- [x] Use the latest versions of TypeScript, ESLint, prettier, babel, webpack, Emotion, React (with Hooks, FC) and xState/Redux
+<details>
+  <summary>Did I use xState or Redux?</summary>
+  <p>
+I used Redux for my state management solution, as it's something I have familiarity with. If I were to redo the project, I would implement 'thunk middleware' for completing HTTP requests amidst actions. My own promise based solution caused more trouble for me in the long run.
+  </p>
+</details>
+- [x] Use data from OpenWeatherMap (or anywhere else) and axios for API requests
+- [x] Use icons from here or anywhere else
+<details>
+  <summary>What is different here?</summary>
+  <p>
+I used icons from the provided icon library, however I chose to use the main image provided by the OpenWeatherMaps API because they looked quite stylish and gave more variety (snow, mist, even hurricanes - very cool!)
+  </p>
+</details>
+- [x] Use the League Gothic font or any other you prefer
+- [x] Add some unit tests
+- [x] Use a Git repository
+- [x] Deploy using Netlify/[Vercel](https://tablecheck-weather-app.vercel.app/)/Amplify
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+### Tech stack
 
-### `npm test`
+- [ ] High scores in Google Lighthouse Audit
+- [ ] Use SSR with Razzle
+- [x] Loads comma separated cities in the query string and rotates them after 5s
+<details>
+  <summary>How was this done?</summary>
+  <p>
+    I added the cities from the URL parameters (using Query String library) and the currently viewed city to the Redux store. Every 5 seconds I dispatch a Redux action to make the next city in the list the current city, which would trigger an action to retrieve data from the API, update the store, and hence the view.
+  </p>
+</details>
+- [x] Use more sophisticated animated/video backgrounds depending on the weather conditions
+<details>
+  <summary>How was this done?</summary>
+  <p>
+    I utilised Particles.JS, a javascript library for simulating particles. I hand crafted some particle simulations resembling weather effects using [this tool](https://vincentgarreau.com/particles.js/), and fed the configurations into the ReactJS compatible library _React TSParticles_
+  </p>
+</details>
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+___
 
-### `npm run build`
+<details>
+  <summary>Project template details and how to run</summary>
+  <p>
+    ### Bootstrapping details
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+    This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+    ### `npm start`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+    Runs the app in the development mode.<br />
+    Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-### `npm run eject`
+    The page will reload if you make edits.<br />
+    You will also see any lint errors in the console.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+    ### `npm test`
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+    Launches the test runner in the interactive watch mode.<br />
+    See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+  </p>
+</details>
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
