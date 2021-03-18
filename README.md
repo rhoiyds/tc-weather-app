@@ -1,9 +1,9 @@
 # TC Weather App
 Roy Porter's implementation of a programming competency test designed for proving basic knowledge in ReactJS and front end web technologies.
 
-https://tcweather-app.vercel.app/
+https://tc-weather-app.vercel.app/
 
-https://tc.vercel.app?city=Naha,Sapporo,Tokyo
+https://tc-weather-app.vercel.app?city=Naha,Sapporo,Tokyo
 
 ### Functional requirements
 
