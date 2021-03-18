@@ -25,7 +25,7 @@ export function Weather() {
           {city}
         </div>
         {icon &&
-        <img className="weather-icon" alt="weather-icon" height="325px" src={`http://openweathermap.org/img/wn/${icon}@4x.png`} />
+        <img className="weather-icon" alt="weather-icon" height="325px" src={`https://openweathermap.org/img/wn/${icon}@4x.png`} />
         }
         <hr />
         <div className="container">
