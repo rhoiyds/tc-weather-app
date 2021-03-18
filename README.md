@@ -3,6 +3,8 @@ Roy Porter's implementation of a programming competency test designed for provin
 
 https://tablecheck-weather-app.vercel.app/
 
+https://tablecheck-weather-app.vercel.app?city=Naha,Sapporo,Tokyo
+
 ### Functional requirements
 
 - [x] Detect the current city using geolocation
@@ -17,7 +19,7 @@ https://tablecheck-weather-app.vercel.app/
 - [x] Cross-browser compatible back to Internet Explorer 11
 - [x] Use the latest versions of TypeScript, ESLint, prettier, babel, webpack, Emotion, React (with Hooks, FC) and xState/Redux
 - [x] Use data from OpenWeatherMap (or anywhere else) and axios for API requests
-- [x] Use icons from here or anywhere else
+- [x] Use icons from WeatherIcons library or anywhere else
 - [x] Use the League Gothic font or any other you prefer
 - [x] Add some unit tests
 - [x] Use a Git repository
@@ -41,19 +43,19 @@ Encountered a bug in the library Axios Cache Adapter which meant Axios was not u
 <details>
   <summary>Responsive layout</summary>
   <p>
-Using basic Flexbox layout principles to create a stretchy interface. If an alternative design was supplied for desktop, maybe media queries would be appropriate.
+Used basic Flexbox layout principles to create a stretchy interface. If an alternative design was supplied for desktop, maybe media queries would be appropriate.
   </p>
 </details>
 <details>
   <summary>xState or Redux?</summary>
   <p>
-I used Redux for my state management solution, as it's something I have familiarity with. If I were to redo the project, I would implement 'thunk middleware' for completing HTTP requests amidst actions. My own promise based solution caused more trouble for me in the long run.
+Used Redux for my state management solution, as it's something I have familiarity with. If I were to redo the project, I would implement 'Thunk middleware' for completing HTTP requests amidst actions. My own promise-based solution caused more trouble for me in the long run.
   </p>
 </details>
 <details>
   <summary>Why is the main weather icon different?</summary>
   <p>
-I used icons from the provided icon library, however I chose to use the main image provided by the OpenWeatherMaps API because they looked quite stylish and gave more variety (snow, mist, even hurricanes - very cool!)
+Used icons from the provided icon library, however I chose to use the main image provided by the OpenWeatherMaps API because they looked quite stylish and gave more variety (snow, mist, even hurricanes - very cool!)
   </p>
 </details>
 <details>
@@ -65,7 +67,7 @@ I used icons from the provided icon library, however I chose to use the main ima
 <details>
   <summary>Extension task - Animated background</summary>
   <p>
-    I utilised Particles.JS, a javascript library for simulating particles. I hand crafted some particle simulations resembling weather effects using particle.js's online generation tool, and fed the configurations into the ReactJS compatible library React TSParticles.
+    I utilised Particles.JS, a javascript library for simulating particles. I hand-crafted some particle simulations resembling weather effects using Particle.js's online generation tool, and fed the configurations into the ReactJS compatible library React TSParticles.
   </p>
 </details>
 

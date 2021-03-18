@@ -19,7 +19,7 @@ function App() {
 
   const dispatch = useDispatch();
 
-  //useEffect to control this function to only run on the first render.
+  // (Roy) useEffect to control this function to only run on the first render.
   useEffect(() => {
 
     const queryString = require('query-string');
@@ -39,6 +39,7 @@ function App() {
       window.setInterval(function(){
         dispatch(nextCity())
       }, 5000);
+
     } else {
       // (Roy) Otherwise resolve our current location, and fetch the weather for there
       requestGeolocation((position) => {
@@ -61,7 +62,7 @@ function App() {
     }
   }, [dispatch]);
 
-  // (Roy) When current city is updated, fetch the weather data
+  // (Roy) When current city is updated, fetch the weather data, but don't rerender the entire App
   useEffect(() => { 
     if (!currentCity) return
     fetchWeatherData({q: currentCity}).then(response => {

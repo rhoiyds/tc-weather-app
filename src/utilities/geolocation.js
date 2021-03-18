@@ -5,8 +5,8 @@ const options = {
 };
 
 function errors(err) {
-    // (Roy) improve error coding to be more transparent to a user
-    console.warn(`ERROR(${err.code}): ${err.message}`);
+    // (Roy) In a real application scenario a nice notification bar would be more appealing
+    alert(`ERROR(${err.code}): ${err.message}, Please enable 'Location services' on your device and try again.`)
 }
 
 export function requestGeolocation(callback) {

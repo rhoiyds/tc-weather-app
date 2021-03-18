@@ -24,7 +24,9 @@ export function Weather() {
         <div className="city-name"> 
           {city}
         </div>
-        {icon &&
+        {
+        // (Roy) Only render an image if we have the icon slug available
+        icon &&
         <img className="weather-icon" alt="weather-icon" height="325px" src={`https://openweathermap.org/img/wn/${icon}@4x.png`} />
         }
         <hr />

@@ -32,19 +32,6 @@ export const { updateCities, nextCity } = citiesSlice.actions;
 
 export const selectCities = state => state.cities.all;
 
-export const currentCity = state => state.cities.current;
-
-export const selectNextCity = state => {
-    const currentCityIndex = state.cities.all.indexOf(state.cities.current)
-    let nextCity = undefined;
-    if (currentCityIndex === state.cities.all.length - 1) {
-        nextCity = state.cities.all[0];
-    } else {
-        nextCity = state.cities.all[currentCityIndex + 1];
-    }
-    return nextCity
-}
-
 export const selectCurrentCity = state => state.cities.current;
 
 export default citiesSlice.reducer;

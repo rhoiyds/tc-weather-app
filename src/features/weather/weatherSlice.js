@@ -17,6 +17,7 @@ export const weatherSlice = createSlice({
   },
   reducers: {
     updateWeather: (state, action) => {
+      // (Roy) Remove decimal points for a visually nicer values
       state.temperature = Math.trunc(action.payload.temperature);
       state.humidity = Math.trunc(action.payload.humidity);
       state.windSpeed = Math.trunc(action.payload.windSpeed);
