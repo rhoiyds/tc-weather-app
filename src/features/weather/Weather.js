@@ -35,7 +35,7 @@ export function Weather() {
           <div className="wind-and-humidity">
             <div className="humidity"><i className="wi wi-raindrop"></i>{humidity}%</div>
             <div className="wind">
-              <i className={"wi " + (isHighwind ? "wi-gale-warning" : "wi-small-craft-advisory")}></i>
+              <i aria-label="flag-icon" className={"wi " + (isHighwind ? "wi-gale-warning" : "wi-small-craft-advisory")}></i>
               {windSpeed} <small>Km/h</small>
             </div>
           </div>
