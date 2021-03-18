@@ -13,8 +13,6 @@ function App() {
 
   const dispatch = useDispatch();
 
-  const queryString = require('query-string');
-
   const isHot = useSelector(selectIsHot);
 
   const conditionParticles = useSelector(selectCondition)
@@ -23,6 +21,8 @@ function App() {
 
   //useEffect to control this function to only run on the first render.
   useEffect(() => {
+
+    const queryString = require('query-string');
 
     // (Roy) Check the URL parameters for a list of cities
     const queryParameter = queryString.parse(window.location.search)['city'];
